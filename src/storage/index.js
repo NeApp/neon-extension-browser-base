@@ -1,0 +1,143 @@
+import StorageContext from './context';
+
+
+export default class Storage {
+    static get supported() {
+        return true;
+    }
+
+    context(name) {
+        return new StorageContext(this, name);
+    }
+
+    remove(key) {
+        return new Promise(function(resolve, reject) {
+            localStorage.removeItem(key);
+            resolve();
+        });
+    }
+
+    // region Get
+
+    get(key) {
+        return new Promise(function(resolve, reject) {
+            resolve(localStorage.getItem(key));
+        });
+    }
+
+    getBoolean(key) {
+        return this.get(key).then(function(value) {
+            if(typeof value === 'boolean' || value === null) {
+                return value;
+            }
+
+            if(value === 'true') {
+                return true;
+            }
+
+            if(value === 'false') {
+                return false;
+            }
+
+            console.warn('Invalid boolean stored (%o), using null instead', value);
+            return null;
+        });
+    }
+
+    getFloat(key) {
+        return this.get(key).then(function(value) {
+            if(value === null) {
+                return value;
+            }
+
+            return parseFloat(value);
+        });
+    }
+
+    getInteger(key) {
+        return this.get(key).then(function(value) {
+            if(value === null) {
+                return value;
+            }
+
+            return parseInt(value, 10);
+        });
+    }
+
+    getObject(key) {
+        return this.get(key).then(function(value) {
+            if(value === null) {
+                return value;
+            }
+
+            return JSON.parse(value);
+        });
+    }
+
+    getString(key) {
+        return this.get(key);
+    }
+
+    // endregion
+
+    // region Put
+
+    put(key, value) {
+        return new Promise(function(resolve, reject) {
+            localStorage.setItem(key, value);
+            resolve();
+        });
+    }
+
+    putBoolean(key, value) {
+        if(value === true) {
+            value = 'true';
+        } else if(value === false) {
+            value = 'false';
+        } else {
+            console.warn('Invalid boolean provided (%o), using null instead', value);
+            value = null;
+        }
+
+        return this.put(key, value);
+    }
+
+    putFloat(key, value) {
+        if(typeof value === 'number') {
+            value = value.toString();
+        } else {
+            console.warn('Invalid float provided (%o), using null instead', value);
+            value = null;
+        }
+
+        return this.put(key, value);
+    }
+
+    putInteger(key, value) {
+        if(typeof value === 'number') {
+            value = value.toString();
+        } else {
+            console.warn('Invalid int provided (%o), using null instead', value);
+            value = null;
+        }
+
+        return this.put(key, value);
+    }
+
+    putObject(key, value) {
+        if(typeof value === 'object') {
+            value = JSON.stringify(value);
+        } else {
+            console.warn('Invalid object provided (%O), using null instead', value);
+            value = null;
+        }
+
+        return this.put(key, value);
+    }
+
+    putString(key, value) {
+        return this.put(key, value);
+    }
+
+    // endregion
+}
