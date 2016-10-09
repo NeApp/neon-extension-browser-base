@@ -1,13 +1,9 @@
-import EventEmitter from 'eventemitter3';
-
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 
+import {EmitterBase} from '../base';
 
-export default class Messaging extends EventEmitter {
-    static get supported() {
-        return false;
-    }
 
+export default class Messaging extends EmitterBase {
     // region Web
 
     connect(extensionId, options) {

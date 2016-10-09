@@ -1,13 +1,9 @@
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 
-import EventEmitter from 'eventemitter3';
+import {EmitterBase} from './base';
 
 
-export default class Permissions extends EventEmitter {
-    static get supported() {
-        return false;
-    }
-
+export default class Permissions extends EmitterBase {
     all() {
         throw new NotImplementedError();
     }

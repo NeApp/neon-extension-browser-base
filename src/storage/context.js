@@ -1,8 +1,12 @@
 import {isDefined} from 'eon.extension.framework/core/helpers';
 
+import {Base} from '../base';
 
-export default class StorageContext {
+
+export default class StorageContext extends Base {
     constructor(storage, name) {
+        super();
+
         this._storage = storage;
         this._name = name;
 

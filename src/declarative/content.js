@@ -1,11 +1,9 @@
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 
+import {Base} from '../base';
 
-export default class DeclarativeContent {
-    static get supported() {
-        return false;
-    }
 
+export default class DeclarativeContent extends Base {
     addRules(rules) {
         throw new NotImplementedError();
     }
@@ -21,27 +19,31 @@ export default class DeclarativeContent {
 
 // region Actions
 
-export class RequestContentScript {
+export class RequestContentScript extends Base {
     static get supported() {
         return true;
     }
 
     constructor(options) {
+        super();
+
         this.options = options;
     }
 }
 
-export class SetIcon {
+export class SetIcon extends Base {
     static get supported() {
         return true;
     }
 
     constructor(options) {
+        super();
+
         this.options = options;
     }
 }
 
-export class ShowPageAction {
+export class ShowPageAction extends Base {
     static get supported() {
         return true;
     }
@@ -51,12 +53,14 @@ export class ShowPageAction {
 
 // region Conditions
 
-export class PageStateMatcher {
+export class PageStateMatcher extends Base {
     static get supported() {
         return true;
     }
 
     constructor(options) {
+        super();
+
         this.options = options;
     }
 }

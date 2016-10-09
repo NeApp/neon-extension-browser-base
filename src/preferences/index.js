@@ -1,8 +1,11 @@
 import PreferencesContext from './context';
+import {Base} from '../base';
 
 
-export default class Preferences {
+export default class Preferences extends Base {
     constructor(storage) {
+        super();
+
         this._storage = storage;
 
         this._definitions = {};

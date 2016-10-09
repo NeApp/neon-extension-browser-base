@@ -1,7 +1,8 @@
 import StorageContext from './context';
+import {Base} from '../base';
 
 
-export default class Storage {
+export default class Storage extends Base {
     static get supported() {
         return true;
     }
