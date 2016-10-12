@@ -4,6 +4,10 @@ import {Base} from './base';
 
 
 export default class Extension extends Base {
+    get key() {
+        return this.id.replace(/[^\w\s]/gi, '');
+    }
+
     get id() {
         throw new NotImplementedError();
     }
@@ -12,7 +16,7 @@ export default class Extension extends Base {
         throw new NotImplementedError();
     }
 
-    getCallbackUrl(id, path) {
+    getCallbackUrl(path) {
         return this.getUrl(path);
     }
 
