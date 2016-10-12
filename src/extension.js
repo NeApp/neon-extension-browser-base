@@ -8,6 +8,14 @@ export default class Extension extends Base {
         throw new NotImplementedError();
     }
 
+    getCallbackPattern() {
+        throw new NotImplementedError();
+    }
+
+    getCallbackUrl(id, path) {
+        return this.getUrl(path);
+    }
+
     getUrl(path) {
         throw new NotImplementedError();
     }
