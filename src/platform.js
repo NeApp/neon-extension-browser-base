@@ -5,6 +5,7 @@ import {Base} from './base';
 
 export const Platforms = {
     Chrome: 'chrome',
+    Edge: 'edge',
     Firefox: 'firefox',
     Opera: 'opera'
 };
