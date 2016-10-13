@@ -1,6 +1,9 @@
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {isDefined} from 'eon.extension.framework/core/helpers';
 
+import isEqual from 'lodash-es/isEqual';
+import isEqualWith from 'lodash-es/isEqualWith';
+
 import {Base} from '../base';
 
 
@@ -15,6 +18,36 @@ export class DeclarativeContent extends Base {
 
     getRules(ruleIdentifiers) {
         throw new NotImplementedError();
+    }
+
+    matches(a, b) {
+        if(!isDefined(a) && !isDefined(b)) {
+            return true;
+        }
+
+        if(!isDefined(a) || !isDefined(b)) {
+            return false;
+        }
+
+        return (
+            isEqual(a.id, b.id) &&
+
+            isEqualWith(a.actions, b.actions, (a, b) => {
+                if(Array.isArray(a) && Array.isArray(b)) {
+                    return a.length === b.length;
+                }
+
+                return a.matches(b);
+            }) &&
+
+            isEqualWith(a.conditions, b.conditions, (a, b) => {
+                if(Array.isArray(a) && Array.isArray(b)) {
+                    return a.length === b.length;
+                }
+
+                return a.matches(b);
+            })
+        );
     }
 }
 
@@ -38,6 +71,24 @@ export class RequestContentScript extends Base {
     static get supported() {
         return true;
     }
+
+    matches(other) {
+        if(!isDefined(other)) {
+            return false;
+        }
+
+        if(!(other instanceof RequestContentScript)) {
+            return false;
+        }
+
+        return (
+            isEqual(this.allFrames, other.allFrames) &&
+            isEqual(this.matchAboutBlank, other.matchAboutBlank) &&
+
+            isEqual(this.css.sort(), other.css.sort()) &&
+            isEqual(this.js.sort(), other.js.sort())
+        );
+    }
 }
 
 export class SetIcon extends Base {
@@ -54,10 +105,19 @@ export class SetIcon extends Base {
     static get supported() {
         return true;
     }
+
+    matches(other) {
+        console.warn('TODO: SetIcon.matches()');
+        return false;
+    }
 }
 
 export class ShowPageAction extends Base {
     static get supported() {
+        return true;
+    }
+
+    matches(other) {
         return true;
     }
 }
@@ -83,6 +143,23 @@ export class PageStateMatcher extends Base {
 
     static get supported() {
         return true;
+    }
+
+    matches(other) {
+        if(!isDefined(other)) {
+            return false;
+        }
+
+        if(!(other instanceof RequestContentScript)) {
+            return false;
+        }
+
+        return (
+            isEqual(this.pageUrl, other.pageUrl) &&
+            isEqual(this.isBookmarked, other.isBookmarked) &&
+
+            isEqual(this.css.sort(), other.css.sort())
+        );
     }
 }
 
