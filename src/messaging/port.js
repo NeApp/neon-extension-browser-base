@@ -3,7 +3,7 @@ import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {EmitterBase} from '../base';
 
 
-export default class Port extends EmitterBase {
+export class Port extends EmitterBase {
     static get supported() {
         return false;
     }

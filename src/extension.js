@@ -3,7 +3,7 @@ import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {Base} from './base';
 
 
-export default class Extension extends Base {
+export class Extension extends Base {
     get key() {
         return this.id.replace(/[^\w\s]/gi, '');
     }

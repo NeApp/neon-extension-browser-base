@@ -3,7 +3,7 @@ import {isDefined} from 'eon.extension.framework/core/helpers';
 import {Base} from '../base';
 
 
-export default class PreferencesContext extends Base {
+export class PreferencesContext extends Base {
     constructor(preferences, name) {
         super();
 

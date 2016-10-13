@@ -3,7 +3,7 @@ import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {Base} from '../base';
 
 
-export default class WebRequestEvent extends Base {
+export class WebRequestEvent extends Base {
     constructor(name) {
         super();
 

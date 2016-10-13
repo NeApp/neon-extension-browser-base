@@ -3,7 +3,7 @@ import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {EmitterBase} from './base';
 
 
-export default class Permissions extends EmitterBase {
+export class Permissions extends EmitterBase {
     all() {
         throw new NotImplementedError();
     }

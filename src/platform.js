@@ -14,7 +14,7 @@ export const PlatformTypes = {
     WebExtensions: 'webextensions'
 };
 
-export default class Platform extends Base {
+export class Platform extends Base {
     get type() {
         throw new NotImplementedError();
     }

@@ -4,7 +4,7 @@ import {isDefined} from 'eon.extension.framework/core/helpers';
 import {Base} from '../base';
 
 
-export default class DeclarativeContent extends Base {
+export class DeclarativeContent extends Base {
     addRules(rules) {
         throw new NotImplementedError();
     }

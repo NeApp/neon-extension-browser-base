@@ -1,8 +1,8 @@
 import {Base} from '../base';
-import RequestEvent from './requestEvent';
+import {RequestEvent} from './requestEvent';
 
 
-export default class WebRequest extends Base {
+export class WebRequest extends Base {
     constructor() {
         super();
 
