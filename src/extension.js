@@ -4,11 +4,15 @@ import {Base} from './base';
 
 
 export class Extension extends Base {
+    get id() {
+        throw new NotImplementedError();
+    }
+
     get key() {
         return this.id.replace(/[^\w\s]/gi, '');
     }
 
-    get id() {
+    get origin() {
         throw new NotImplementedError();
     }
 
