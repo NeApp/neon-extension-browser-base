@@ -1,10 +1,30 @@
+import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
+import {isDefined} from 'eon.extension.framework/core/helpers';
+import MessagingBus from 'eon.extension.framework/messaging/bus';
+
 import {StorageContext} from './context';
 import {Base} from '../base';
 
+let Bus = null;
+
 
 export class Storage extends Base {
+    constructor() {
+        super();
+
+        // Initialize messaging bus if we aren't in the extension context
+        if(window.location.origin !== this.browser.extension.origin && !isDefined(Bus)) {
+            Bus = new MessagingBus(window.location.hostname + ':storage');
+            Bus.connect('eon.extension.core:storage');
+        }
+    }
+
     static get supported() {
         return true;
+    }
+
+    get browser() {
+        throw new NotImplementedError();
     }
 
     context(name) {
@@ -12,6 +32,10 @@ export class Storage extends Base {
     }
 
     remove(key) {
+        if(window.location.origin !== this.browser.extension.origin) {
+            throw new NotImplementedError();
+        }
+
         return new Promise(function(resolve, reject) {
             localStorage.removeItem(key);
             resolve();
@@ -21,7 +45,24 @@ export class Storage extends Base {
     // region Get
 
     get(key) {
-        return new Promise(function(resolve, reject) {
+        if(window.location.origin !== this.browser.extension.origin) {
+            if(!isDefined(Bus)) {
+                return Promise.reject(new Error('Messaging bus is not available'));
+            }
+
+            // Get item via background page
+            return Bus.request('eon.extension.core:storage', 'storage.get', key)
+                .then((result) => {
+                    if(result.success) {
+                        return result.value;
+                    }
+
+                    return Promise.reject(new Error('Unable to retrieve item'));
+                });
+        }
+
+        // Get item directly from `localStorage`
+        return new Promise(function(resolve) {
             resolve(localStorage.getItem(key));
         });
     }
@@ -84,7 +125,11 @@ export class Storage extends Base {
     // region Put
 
     put(key, value) {
-        return new Promise(function(resolve, reject) {
+        if(window.location.origin !== this.browser.extension.origin) {
+            throw new NotImplementedError();
+        }
+
+        return new Promise(function(resolve) {
             localStorage.setItem(key, value);
             resolve();
         });
