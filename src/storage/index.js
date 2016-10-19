@@ -1,3 +1,4 @@
+import Log from 'eon.extension.framework/core/logger';
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {isDefined} from 'eon.extension.framework/core/helpers';
 import MessagingBus from 'eon.extension.framework/messaging/bus';
@@ -81,7 +82,7 @@ export class Storage extends Base {
                 return false;
             }
 
-            console.warn('Invalid boolean stored (%o), using null instead', value);
+            Log.warn('Invalid boolean stored (%o), using null instead', value);
             return null;
         });
     }
@@ -141,7 +142,7 @@ export class Storage extends Base {
         } else if(value === false) {
             value = 'false';
         } else {
-            console.warn('Invalid boolean provided (%o), using null instead', value);
+            Log.warn('Invalid boolean provided (%o), using null instead', value);
             value = null;
         }
 
@@ -152,7 +153,7 @@ export class Storage extends Base {
         if(typeof value === 'number') {
             value = value.toString();
         } else {
-            console.warn('Invalid float provided (%o), using null instead', value);
+            Log.warn('Invalid float provided (%o), using null instead', value);
             value = null;
         }
 
@@ -163,7 +164,7 @@ export class Storage extends Base {
         if(typeof value === 'number') {
             value = value.toString();
         } else {
-            console.warn('Invalid int provided (%o), using null instead', value);
+            Log.warn('Invalid int provided (%o), using null instead', value);
             value = null;
         }
 
@@ -174,7 +175,7 @@ export class Storage extends Base {
         if(typeof value === 'object') {
             value = JSON.stringify(value);
         } else {
-            console.warn('Invalid object provided (%O), using null instead', value);
+            Log.warn('Invalid object provided (%O), using null instead', value);
             value = null;
         }
 

@@ -1,3 +1,4 @@
+import Log from 'eon.extension.framework/core/logger';
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {isDefined} from 'eon.extension.framework/core/helpers';
 
@@ -107,7 +108,7 @@ export class SetIcon extends Base {
     }
 
     matches(other) {
-        console.warn('TODO: SetIcon.matches()');
+        Log.warn('TODO: SetIcon.matches()');
         return false;
     }
 }
