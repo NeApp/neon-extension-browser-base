@@ -1,3 +1,8 @@
+import Log from 'eon.extension.framework/core/logger';
+import {isDefined} from 'eon.extension.framework/core/helpers';
+
+import merge from 'lodash-es/merge';
+
 import {PreferencesContext} from './context';
 import {Base} from '../base';
 
@@ -9,6 +14,7 @@ export class Preferences extends Base {
         this._storage = storage;
 
         this._definitions = {};
+        this._pages = {};
     }
 
     static get supported() {
@@ -19,53 +25,91 @@ export class Preferences extends Base {
         return this._storage.context('preferences');
     }
 
-    context(name) {
-        return new PreferencesContext(this, name);
+    get definitions() {
+        return this._definitions;
     }
 
-    register(item) {
-        // Ensure option/group hasn't already been registered
-        if(typeof this._definitions[item.id] !== 'undefined') {
-            console.warn('Option %o has already been registered', item.id);
-            return;
-        }
+    get pages() {
+        return this._pages;
+    }
 
-        // Store reference
-        this._definitions[item.id] = item;
-
-        // Process item registration
-        if(item.type === 'group') {
-            console.debug('Registered preference group: %o', item.id, item);
-
-            // Register group children
-            for(let i = 0; i < item.children.length; ++i) {
-                this.register(item.children[i]);
-            }
-        } else {
-            console.debug('Registered preference: %o', item.id, item);
-        }
+    context(name) {
+        return new PreferencesContext(this, name);
     }
 
     remove(key) {
         return this.bucket.remove(key);
     }
 
+    // region Register
+
+    register(item) {
+        if(item.type === 'group') {
+            return this.registerGroup(item);
+        }
+
+        if(item.type === 'page') {
+            return this.registerPage(item);
+        }
+
+        // Ensure option hasn't already been registered
+        if(isDefined(this._definitions[item.id])) {
+            Log.warn('Preference option %o has already been registered', item.id);
+            return false;
+        }
+
+        // Store option reference
+        this._definitions[item.id] = item;
+
+        Log.debug('Registered preference option: %o', item.id, item);
+        return true;
+    }
+
+    registerGroup(group) {
+        Log.debug('Registered preference group: %o', group.id, group);
+
+        // Register children
+        for(let i = 0; i < group.children.length; ++i) {
+            this.register(group.children[i]);
+        }
+
+        return true;
+    }
+
+    registerPage(page) {
+        // Ensure page group exists
+        if(!isDefined(this._pages[page.plugin.type])) {
+            this._pages[page.plugin.type] = {};
+        }
+
+        // Ensure page hasn't already been registered
+        if(isDefined(this._pages[page.plugin.type][page.id])) {
+            Log.warn('Preference page %o has already been registered', page.id);
+            return false;
+        }
+
+        // Store page reference
+        this._pages[page.plugin.type][page.id] = page;
+
+        Log.debug('Registered preference page: %o', page.id, page);
+
+        // Register children
+        for(let i = 0; i < page.children.length; ++i) {
+            this.register(page.children[i]);
+        }
+
+        return true;
+    }
+
+    // endregion
+
     // region Get
 
     get(key) {
-        // Retrieve option definition
-        let definition = this._definitions[key];
-
-        if(typeof definition === 'undefined') {
-            return Promise.reject(
-                new Error('No preference definition found for: "' + key + '"')
-            );
-        }
-
         // Retrieve preference value from storage
         return this.bucket.get(key).then((value) => {
             if(value === null) {
-                return definition.options.default;
+                return this._getDefault(key);
             }
 
             return value;
@@ -73,19 +117,10 @@ export class Preferences extends Base {
     }
 
     getBoolean(key) {
-        // Retrieve option definition
-        let definition = this._definitions[key];
-
-        if(typeof definition === 'undefined') {
-            return Promise.reject(
-                new Error('No preference definition found for: "' + key + '"')
-            );
-        }
-
         // Retrieve preference value from storage
         return this.bucket.getBoolean(key).then((value) => {
             if(value === null) {
-                return definition.options.default;
+                return this._getDefault(key);
             }
 
             return value;
@@ -93,19 +128,10 @@ export class Preferences extends Base {
     }
 
     getFloat(key) {
-        // Retrieve option definition
-        let definition = this._definitions[key];
-
-        if(typeof definition === 'undefined') {
-            return Promise.reject(
-                new Error('No preference definition found for: "' + key + '"')
-            );
-        }
-
         // Retrieve preference value from storage
         return this.bucket.getFloat(key).then((value) => {
             if(value === null) {
-                return definition.options.default;
+                return this._getDefault(key);
             }
 
             return value;
@@ -113,19 +139,10 @@ export class Preferences extends Base {
     }
 
     getInteger(key) {
-        // Retrieve option definition
-        let definition = this._definitions[key];
-
-        if(typeof definition === 'undefined') {
-            return Promise.reject(
-                new Error('No preference definition found for: "' + key + '"')
-            );
-        }
-
         // Retrieve preference value from storage
         return this.bucket.getInteger(key).then((value) => {
             if(value === null) {
-                return definition.options.default;
+                return this._getDefault(key);
             }
 
             return value;
@@ -133,19 +150,10 @@ export class Preferences extends Base {
     }
 
     getObject(key) {
-        // Retrieve option definition
-        let definition = this._definitions[key];
-
-        if(typeof definition === 'undefined') {
-            return Promise.reject(
-                new Error('No preference definition found for: "' + key + '"')
-            );
-        }
-
         // Retrieve preference value from storage
         return this.bucket.getObject(key).then((value) => {
             if(value === null) {
-                return definition.options.default;
+                return this._getDefault(key);
             }
 
             return value;
@@ -153,19 +161,10 @@ export class Preferences extends Base {
     }
 
     getString(key) {
-        // Retrieve option definition
-        let definition = this._definitions[key];
-
-        if(typeof definition === 'undefined') {
-            return Promise.reject(
-                new Error('No preference definition found for: "' + key + '"')
-            );
-        }
-
         // Retrieve preference value from storage
         return this.bucket.getString(key).then((value) => {
             if(value === null) {
-                return definition.options.default;
+                return this._getDefault(key);
             }
 
             return value;
@@ -198,6 +197,41 @@ export class Preferences extends Base {
 
     putString(key, value) {
         return this.bucket.putString(key, value);
+    }
+
+    // endregion
+
+    // region Private methods
+
+    _getDefault(key, options) {
+        options = merge({
+            timeout: 5000
+        }, options);
+
+        return new Promise((resolve, reject) => {
+            let deferred = false;
+
+            let get = () => {
+                let definition = this._definitions[key];
+
+                if(isDefined(definition)) {
+                    resolve(definition.options.default);
+                    return;
+                }
+
+                if(deferred) {
+                    reject(new Error('Unable to find preference definition for: "' + key + '"'));
+                    return;
+                }
+
+                // Try retrieve definition again in `options.timeout` milliseconds
+                deferred = true;
+                setTimeout(get, options.timeout);
+            };
+
+            // Get default value
+            get();
+        });
     }
 
     // endregion
