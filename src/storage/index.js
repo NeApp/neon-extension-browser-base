@@ -1,7 +1,6 @@
 import Log from 'eon.extension.framework/core/logger';
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {isDefined} from 'eon.extension.framework/core/helpers';
-import MessagingBus from 'eon.extension.framework/messaging/bus';
 
 import {StorageContext} from './context';
 import {Base} from '../base';
@@ -10,16 +9,6 @@ let Bus = null;
 
 
 export class Storage extends Base {
-    constructor() {
-        super();
-
-        // Initialize messaging bus if we aren't in the extension context
-        if(window.location.origin !== this.browser.extension.origin && !isDefined(Bus)) {
-            Bus = new MessagingBus(window.location.hostname + ':storage');
-            Bus.connect('eon.extension.core:storage');
-        }
-    }
-
     static get supported() {
         return true;
     }
@@ -47,12 +36,8 @@ export class Storage extends Base {
 
     get(key) {
         if(window.location.origin !== this.browser.extension.origin) {
-            if(!isDefined(Bus)) {
-                return Promise.reject(new Error('Messaging bus is not available'));
-            }
-
             // Get item via background page
-            return Bus.request('eon.extension.core:storage', 'storage.get', key)
+            return this._getBus().request('eon.extension.core:storage', 'storage.get', key)
                 .then((result) => {
                     if(result.success) {
                         return result.value;
@@ -184,6 +169,28 @@ export class Storage extends Base {
 
     putString(key, value) {
         return this.put(key, value);
+    }
+
+    // endregion
+
+    // region Private methods
+
+    _getBus() {
+        if(isDefined(Bus)) {
+            return Bus;
+        }
+
+        // Import messsaging bus
+        let MessagingBus = require('eon.extension.framework/messaging/bus').default;
+
+        if(!isDefined(MessagingBus)) {
+            return Promise.reject('Messaging bus is not available');
+        }
+
+        // Connect to messaging bus
+        Bus = new MessagingBus(window.location.hostname + ':storage');
+        Bus.connect('eon.extension.core:storage');
+        return Bus;
     }
 
     // endregion
