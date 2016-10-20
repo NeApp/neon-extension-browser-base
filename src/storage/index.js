@@ -2,6 +2,8 @@ import Log from 'eon.extension.framework/core/logger';
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {isDefined} from 'eon.extension.framework/core/helpers';
 
+import uuid from 'uuid';
+
 import {StorageContext} from './context';
 import {Base} from '../base';
 
@@ -188,7 +190,7 @@ export class Storage extends Base {
         }
 
         // Connect to messaging bus
-        Bus = new MessagingBus(window.location.hostname + ':storage');
+        Bus = new MessagingBus(window.location.hostname + ':storage:' + uuid.v4());
         Bus.connect('eon.extension.core:storage');
         return Bus;
     }
