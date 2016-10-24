@@ -6,6 +6,10 @@ export class Base {
         return false;
     }
 
+    get available() {
+        return true
+    }
+
     get supported() {
         return this.constructor.supported;
     }
@@ -14,6 +18,10 @@ export class Base {
 export class EmitterBase extends EventEmitter {
     static get supported() {
         return false;
+    }
+
+    get available() {
+        return true
     }
 
     get supported() {
