@@ -7,7 +7,7 @@ export class Base {
     }
 
     get available() {
-        return true
+        return true;
     }
 
     get supported() {
@@ -21,7 +21,7 @@ export class EmitterBase extends EventEmitter {
     }
 
     get available() {
-        return true
+        return true;
     }
 
     get supported() {
