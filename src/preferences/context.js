@@ -13,10 +13,6 @@ export class PreferencesContext extends Base {
         if(!isDefined(this._name)) {
             throw new Error('Invalid value provided for the "name" parameter');
         }
-
-        if(this._name.indexOf(':') !== -1) {
-            throw new Error('Context names can\'t contain ":" characters');
-        }
     }
 
     static get supported() {
@@ -25,6 +21,10 @@ export class PreferencesContext extends Base {
 
     get name() {
         return this._name;
+    }
+
+    context(name) {
+        return new PreferencesContext(this._preferences, this._buildKey(name));
     }
 
     exists(key) {
