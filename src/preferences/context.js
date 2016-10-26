@@ -27,6 +27,10 @@ export class PreferencesContext extends Base {
         return this._name;
     }
 
+    exists(key) {
+        return this._preferences.exists(this._buildKey(key));
+    }
+
     remove(key) {
         return this._preferences.remove(this._buildKey(key));
     }
