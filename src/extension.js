@@ -1,9 +1,9 @@
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 
-import {Base} from './base';
+import {EmitterBase} from './base';
 
 
-export class Extension extends Base {
+export class Extension extends EmitterBase {
     get id() {
         throw new NotImplementedError();
     }

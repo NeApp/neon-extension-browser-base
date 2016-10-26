@@ -37,6 +37,10 @@ export class Preferences extends Base {
         return new PreferencesContext(this, name);
     }
 
+    exists(key) {
+        return isDefined(this._definitions[key]);
+    }
+
     remove(key) {
         return this.bucket.remove(key);
     }
