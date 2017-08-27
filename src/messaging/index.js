@@ -6,11 +6,11 @@ import {EmitterBase} from '../base';
 export class Messaging extends EmitterBase {
     // region Web
 
-    connect(extensionId, options) {
+    connect(...args) {
         throw new NotImplementedError();
     }
 
-    sendMessage(extensionId, message, options) {
+    sendMessage(...args) {
         throw new NotImplementedError();
     }
 
@@ -18,11 +18,11 @@ export class Messaging extends EmitterBase {
 
     // region Native
 
-    connectNative(application) {
+    connectNative(...args) {
         throw new NotImplementedError();
     }
 
-    sendNativeMessage(application, message) {
+    sendNativeMessage(...args) {
         throw new NotImplementedError();
     }
 
