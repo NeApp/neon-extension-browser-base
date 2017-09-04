@@ -27,4 +27,12 @@ export class Extension extends EmitterBase {
     getUrl(path) {
         throw new NotImplementedError();
     }
+
+    isBackgroundPage() {
+        return window.location.href.endsWith('/_generated_background_page.html');
+    }
+
+    isExtensionPage() {
+        return window.location.origin === this.origin;
+    }
 }
