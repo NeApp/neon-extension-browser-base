@@ -65,12 +65,12 @@ export class Preferences extends Base {
         // Store option reference
         this._definitions[item.id] = item;
 
-        Log.debug('Registered preference option: %o', item.id, item);
+        Log.trace('Registered preference option: %o', item.id, item);
         return true;
     }
 
     registerGroup(group) {
-        Log.debug('Registered preference group: %o', group.id, group);
+        Log.trace('Registered preference group: %o', group.id, group);
 
         // Register children
         for(let i = 0; i < group.children.length; ++i) {
@@ -95,7 +95,7 @@ export class Preferences extends Base {
         // Store page reference
         this._pages[page.plugin.type][page.id] = page;
 
-        Log.debug('Registered preference page: %o', page.id, page);
+        Log.trace('Registered preference page: %o', page.id, page);
 
         // Register children
         for(let i = 0; i < page.children.length; ++i) {
