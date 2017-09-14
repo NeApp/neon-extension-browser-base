@@ -17,7 +17,7 @@ export class Extension extends EmitterBase {
     }
 
     getCallbackPattern() {
-        throw new NotImplementedError();
+        return this.getCallbackUrl('*/*/callback/callback.html*');
     }
 
     getCallbackUrl(path) {
