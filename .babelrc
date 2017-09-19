@@ -1,7 +1,12 @@
 {
   "presets": ["es2015", "react"],
   "plugins": [
-    "babel-plugin-add-module-exports",
-    "babel-plugin-transform-object-rest-spread"
+    "add-module-exports",
+    "transform-object-rest-spread",
+    ["module-resolver", {
+      "alias": {
+        "eon.extension.framework": "../../eon.extension.framework/src"
+      }
+    }]
   ]
 }
