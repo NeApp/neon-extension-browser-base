@@ -1,8 +1,8 @@
 import Log from 'eon.extension.framework/core/logger';
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 
-import {StorageContext} from './context';
 import {Base} from '../base';
+import {StorageContext} from './context';
 
 
 export class Storage extends Base {

@@ -1,9 +1,9 @@
+import isEqual from 'lodash-es/isEqual';
+import isEqualWith from 'lodash-es/isEqualWith';
+
 import Log from 'eon.extension.framework/core/logger';
 import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
 import {isDefined} from 'eon.extension.framework/core/helpers';
-
-import isEqual from 'lodash-es/isEqual';
-import isEqualWith from 'lodash-es/isEqualWith';
 
 import {Base} from '../base';
 
