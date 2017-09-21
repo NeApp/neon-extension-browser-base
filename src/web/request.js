@@ -1,5 +1,5 @@
 import {Base} from '../base';
-import {RequestEvent} from './requestEvent';
+import {WebRequestEvent} from './requestEvent';
 
 
 export class WebRequest extends Base {
@@ -10,6 +10,6 @@ export class WebRequest extends Base {
     }
 
     createEvent(name) {
-        return new RequestEvent(name);
+        return new WebRequestEvent(name);
     }
 }
