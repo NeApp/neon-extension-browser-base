@@ -3,7 +3,7 @@
   "plugins": [
     "add-module-exports",
     "transform-object-rest-spread",
-    ["module-resolver", {
+    ["@fuzeman/module-resolver", {
       "alias": {
         "eon.extension.framework": "../../eon.extension.framework/src"
       }
