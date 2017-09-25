@@ -1,4 +1,4 @@
-import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
+import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
 
 import {EmitterBase} from './base';
 

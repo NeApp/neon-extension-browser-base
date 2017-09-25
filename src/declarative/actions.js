@@ -1,7 +1,7 @@
 import isEqual from 'lodash-es/isEqual';
 
-import Log from 'eon.extension.framework/core/logger';
-import {isDefined} from 'eon.extension.framework/core/helpers';
+import Log from 'neon-extension-framework/core/logger';
+import {isDefined} from 'neon-extension-framework/core/helpers';
 
 import {Base} from '../base';
 

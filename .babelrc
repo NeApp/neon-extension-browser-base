@@ -5,7 +5,7 @@
     "transform-object-rest-spread",
     ["@fuzeman/module-resolver", {
       "alias": {
-        "eon.extension.framework": "../../eon.extension.framework/src"
+        "neon-extension-framework": "../../neon-extension-framework/src"
       }
     }]
   ]

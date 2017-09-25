@@ -1,8 +1,8 @@
 import isEqual from 'lodash-es/isEqual';
 import isEqualWith from 'lodash-es/isEqualWith';
 
-import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
-import {isDefined} from 'eon.extension.framework/core/helpers';
+import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
+import {isDefined} from 'neon-extension-framework/core/helpers';
 
 import {Base} from '../base';
 

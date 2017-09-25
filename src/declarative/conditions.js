@@ -1,6 +1,6 @@
 import isEqual from 'lodash-es/isEqual';
 
-import {isDefined} from 'eon.extension.framework/core/helpers';
+import {isDefined} from 'neon-extension-framework/core/helpers';
 
 import {Base} from '../base';
 

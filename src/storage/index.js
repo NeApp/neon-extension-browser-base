@@ -1,5 +1,5 @@
-import Log from 'eon.extension.framework/core/logger';
-import {NotImplementedError} from 'eon.extension.framework/core/exceptions';
+import Log from 'neon-extension-framework/core/logger';
+import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
 
 import {Base} from '../base';
 import {StorageContext} from './context';
