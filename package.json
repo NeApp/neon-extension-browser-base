@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "eventemitter3": "^2.0.3",
+    "eventemitter3": "^2.0.0",
     "foundation-sites": "^6.4.3",
     "jquery": "^3.2.1",
     "lodash-es": "^4.16.1",
