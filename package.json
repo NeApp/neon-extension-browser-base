@@ -1,6 +1,20 @@
 {
   "name": "neon-extension-browser-base",
   "version": "1.2.3-beta",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "eventemitter3": "^2.0.0",
+    "foundation-sites": "^6.4.3",
+    "jquery": "^3.2.1",
+    "lodash-es": "^4.16.1",
+    "prop-types": "^15.5.10",
+    "querystring": "^0.2.0",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-router": "^2.6.1",
+    "urijs": "^1.18.2",
+    "uuid": "^2.0.3"
+  },
   "devDependencies": {
     "@fuzeman/babel-plugin-module-resolver": "^3.0.0-beta.5",
     "@fuzeman/eslint-import-resolver-babel-module": "^4.1.0",
@@ -16,18 +30,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^6.3.0"
   },
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "eventemitter3": "^2.0.0",
-    "foundation-sites": "^6.4.3",
-    "jquery": "^3.2.1",
-    "lodash-es": "^4.16.1",
-    "prop-types": "^15.5.10",
-    "querystring": "^0.2.0",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "react-router": "^2.6.1",
-    "urijs": "^1.18.2",
-    "uuid": "^2.0.3"
+  "peerDependencies": {
+    "neon-extension-framework": "^1.2.2-beta"
   }
 }
