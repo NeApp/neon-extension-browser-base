@@ -5,7 +5,7 @@ import {EmitterBase} from '../base';
 
 export class Port extends EmitterBase {
     static get supported() {
-        return false;
+        return true;
     }
 
     get name() {

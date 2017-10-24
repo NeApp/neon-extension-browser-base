@@ -15,6 +15,10 @@ export const PlatformTypes = {
 };
 
 export class Platform extends Base {
+    static get supported() {
+        return true;
+    }
+
     get type() {
         throw new NotImplementedError();
     }

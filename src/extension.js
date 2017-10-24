@@ -4,6 +4,10 @@ import {EmitterBase} from './base';
 
 
 export class Extension extends EmitterBase {
+    static get supported() {
+        return true;
+    }
+
     get id() {
         throw new NotImplementedError();
     }

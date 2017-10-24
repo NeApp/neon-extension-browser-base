@@ -10,6 +10,10 @@ export class WebRequestEvent extends Base {
         this.name = name;
     }
 
+    static get supported() {
+        return true;
+    }
+
     addListener(callback, options) {
         throw new NotImplementedError();
     }
