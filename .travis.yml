@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '7'
+script:
+- npm run test
+deploy:
+  provider: npm
+  email: neapp-ci@me.dgardiner.net
+  api_key:
+    secure: X7Y8OdxcrOp7Y35KhwK5CXCOoGdzABlvBWqXHKRTrpH/UBqU1Gyajw+riKEfbqs6u7SZuvJKDF4rL5l6InEINPxVVuYrP4KOZW44H5U9uYdNwNoKaqofDB0etlQszgTsWhdcetjW98k8nuf76eculz+lDRHwJiNfzFkQ7ypTVHxdVVjQ86+TK/dPjumXZM7HirAHQugRtqaB9Az0qnk/lg/b6b5J2FIlkzkMVlR3E5Kt2KRfrrNmD9C4UCfw6nFUVVwfqdUA8U53RUQpE9Nm6OG/sHd9xxOmoynh8O5Pg00YZVUCAycngGjd3aa8sUsOCNUbX+S+xP06eOKWc4GC9BGuh4mpE0tcxwN89+bjjZOIpboXRLvVEnWYVOKUsu2aS37FYq6R2fZ4WMOaH0KwJt+MSexXarxFew8vRAI/gWGR9vJT4Yqj0wMGfvT/m3vWltsa/MKkNqo5G4QhD59P3JPVACuqZYrmdS31s81SQF1IYxQR141Fd5TQHrpsGEsXzMfhEdCDgvoQpx2o104Pf9YHv6G7LzyqNMMrKNJLuMdE13I0Rf6AFZBSCncqy+Fiq5LT11v4wSff6WLJDj7PmiJ4B8Nt5RdZc8HnhfGqvTfOvfIhbkaqM0eZME3dnB/x+VwlBFEnHjaX+HrcMR8OFWNhF2jJsKBegCVW5JIu28o=
+  on:
+    repo: NeApp/neon-extension-browser-base
+    tags: true

@@ -18,5 +18,8 @@
     "eventemitter3": "^2.0.0",
     "lodash-es": "^4.16.1",
     "neon-extension-framework": "^1.5.1-beta.1"
+  },
+  "scripts": {
+    "test": "echo No tests available yet."
   }
 }
