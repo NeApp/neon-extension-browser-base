@@ -1,6 +1,22 @@
 {
   "name": "neon-extension-browser-base",
   "version": "1.5.1-beta.1",
+  "description": "Neon Extension: Browser Interface Base",
+  "keywords": ["neon", "neon-extension"],
+  "homepage": "https://github.com/NeApp/neon-extension",
+  "author": "Dean Gardiner <me@dgardiner.net>",
+  "license": "GPL-3.0",
+  "main": "./src",
+  "bugs": {
+    "url": "https://github.com/NeApp/neon-extension/issues"
+  },
+  "repostitory": {
+    "type": "git",
+    "url": "https://github.com/NeApp/neon-extension-browser-base"
+  },
+  "scripts": {
+    "test": "echo No tests available yet."
+  },
   "devDependencies": {
     "babel-core": "^7.0.0-beta.1",
     "babel-eslint": "^8.0.0",
@@ -18,8 +34,5 @@
     "eventemitter3": "^2.0.0",
     "lodash-es": "^4.16.1",
     "neon-extension-framework": "^1.5.1-beta.1"
-  },
-  "scripts": {
-    "test": "echo No tests available yet."
   }
 }
