@@ -3,7 +3,7 @@ import EventEmitter from 'eventemitter3';
 import {isDefined} from 'neon-extension-framework/core/helpers';
 
 
-function isSupported(key) {
+export function isSupported(key) {
     let supported = neon.browser.api[key];
 
     if(!isDefined(supported)) {
