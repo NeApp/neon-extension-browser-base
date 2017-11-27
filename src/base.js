@@ -23,7 +23,11 @@ export class Base {
     }
 
     static get supported() {
-        return isSupported(this.key) && isDefined(this.api);
+        try {
+            return isSupported(this.key) && isDefined(this.api);
+        } catch(e) {
+            return false;
+        }
     }
 
     get available() {
@@ -49,7 +53,11 @@ export class EmitterBase extends EventEmitter {
     }
 
     static get supported() {
-        return isSupported(this.key) && isDefined(this.api);
+        try {
+            return isSupported(this.key) && isDefined(this.api);
+        } catch(e) {
+            return false;
+        }
     }
 
     get available() {

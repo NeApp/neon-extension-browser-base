@@ -11,6 +11,8 @@ import {Base} from './base';
 const VersionRegex = /^(\d+)(?:\.(\d+))?/g;
 
 export const Platforms = {
+    Unknown: 'Unknown',
+
     Chrome: 'Chrome',
     Edge: 'Edge',
     Firefox: 'Firefox',
@@ -18,6 +20,8 @@ export const Platforms = {
 };
 
 export const PlatformTypes = {
+    Unknown: 'Unknown',
+
     WebExtension: 'WebExtension'
 };
 
@@ -70,14 +74,16 @@ export class Platform extends Base {
     }
 
     get name() {
-        throw new NotImplementedError();
+        return Platforms.Unknown;
     }
 
     get type() {
-        throw new NotImplementedError();
+        return PlatformTypes.Unknown;
     }
 
     get version() {
         return this._version;
     }
 }
+
+export default new Platform();

@@ -13,3 +13,5 @@ export class WebRequest extends Base {
         return new WebRequestEvent(name);
     }
 }
+
+export default new WebRequest();

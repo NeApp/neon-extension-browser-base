@@ -28,3 +28,5 @@ export class Messaging extends EmitterBase {
 
     // endregion
 }
+
+export default new Messaging();

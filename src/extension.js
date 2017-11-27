@@ -9,7 +9,7 @@ export class Extension extends EmitterBase {
     }
 
     get id() {
-        throw new NotImplementedError();
+        return 'unknown';
     }
 
     get key() {
@@ -17,7 +17,7 @@ export class Extension extends EmitterBase {
     }
 
     get origin() {
-        throw new NotImplementedError();
+        return 'neon://unknown';
     }
 
     getCallbackPattern() {
@@ -29,7 +29,7 @@ export class Extension extends EmitterBase {
     }
 
     getUrl(path) {
-        throw new NotImplementedError();
+        return 'neon://unknown/' + path;
     }
 
     isBackgroundPage() {
@@ -40,3 +40,5 @@ export class Extension extends EmitterBase {
         return window.location.origin === this.origin;
     }
 }
+
+export default new Extension();
