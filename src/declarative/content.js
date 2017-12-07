@@ -1,8 +1,8 @@
-import isEqual from 'lodash-es/isEqual';
-import isEqualWith from 'lodash-es/isEqualWith';
+import IsEqual from 'lodash-es/isEqual';
+import IsEqualWith from 'lodash-es/isEqualWith';
+import IsNil from 'lodash-es/isNil';
 
 import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
-import {isDefined} from 'neon-extension-framework/core/helpers';
 
 import {Base} from '../base';
 
@@ -21,18 +21,18 @@ export class DeclarativeContent extends Base {
     }
 
     matches(a, b) {
-        if(!isDefined(a) && !isDefined(b)) {
+        if(IsNil(a) && IsNil(b)) {
             return true;
         }
 
-        if(!isDefined(a) || !isDefined(b)) {
+        if(IsNil(a) || IsNil(b)) {
             return false;
         }
 
         return (
-            isEqual(a.id, b.id) &&
+            IsEqual(a.id, b.id) &&
 
-            isEqualWith(a.actions, b.actions, (a, b) => {
+            IsEqualWith(a.actions, b.actions, (a, b) => {
                 if(Array.isArray(a) && Array.isArray(b)) {
                     return a.length === b.length;
                 }
@@ -40,7 +40,7 @@ export class DeclarativeContent extends Base {
                 return a.matches(b);
             }) &&
 
-            isEqualWith(a.conditions, b.conditions, (a, b) => {
+            IsEqualWith(a.conditions, b.conditions, (a, b) => {
                 if(Array.isArray(a) && Array.isArray(b)) {
                     return a.length === b.length;
                 }

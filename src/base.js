@@ -1,12 +1,11 @@
 import EventEmitter from 'eventemitter3';
-
-import {isDefined} from 'neon-extension-framework/core/helpers';
+import IsNil from 'lodash-es/isNil';
 
 
 export function isSupported(key) {
     let supported = neon.browser.api[key];
 
-    if(!isDefined(supported)) {
+    if(IsNil(supported)) {
         return false;
     }
 
@@ -24,7 +23,7 @@ export class Base {
 
     static get supported() {
         try {
-            return isSupported(this.key) && isDefined(this.api);
+            return isSupported(this.key) && !IsNil(this.api);
         } catch(e) {
             return false;
         }
@@ -54,7 +53,7 @@ export class EmitterBase extends EventEmitter {
 
     static get supported() {
         try {
-            return isSupported(this.key) && isDefined(this.api);
+            return isSupported(this.key) && !IsNil(this.api);
         } catch(e) {
             return false;
         }

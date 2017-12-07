@@ -1,9 +1,9 @@
 import Bowser from 'bowser';
+import IsNil from 'lodash-es/isNil';
 import Merge from 'lodash-es/merge';
 import ToNumber from 'lodash-es/toNumber';
 
 import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
-import {isDefined} from 'neon-extension-framework/core/helpers';
 
 import {Base} from './base';
 
@@ -39,14 +39,14 @@ export class Version {
     }
 
     static parse(version, options) {
-        if(!isDefined(version)) {
+        if(IsNil(version)) {
             return new Version(null);
         }
 
         // Match version against pattern
         let match = VersionRegex.exec(version);
 
-        if(!isDefined(match)) {
+        if(IsNil(match)) {
             return new Version(null);
         }
 

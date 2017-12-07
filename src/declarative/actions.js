@@ -1,7 +1,7 @@
-import isEqual from 'lodash-es/isEqual';
+import IsEqual from 'lodash-es/isEqual';
+import IsNil from 'lodash-es/isNil';
 
 import Log from 'neon-extension-framework/core/logger';
-import {isDefined} from 'neon-extension-framework/core/helpers';
 
 import {Base} from '../base';
 
@@ -10,15 +10,15 @@ export class RequestContentScript extends Base {
     constructor(options) {
         super();
 
-        if(!isDefined(options)) {
+        if(IsNil(options)) {
             throw new Error('Invalid value provided for the "options" parameter');
         }
 
-        this.css = isDefined(options.css) ? options.css : [];
-        this.js = isDefined(options.js) ? options.js : [];
+        this.css = !IsNil(options.css) ? options.css : [];
+        this.js = !IsNil(options.js) ? options.js : [];
 
-        this.allFrames = isDefined(options.allFrames) ? options.allFrames : false;
-        this.matchAboutBlank = isDefined(options.matchAboutBlank) ? options.matchAboutBlank : false;
+        this.allFrames = !IsNil(options.allFrames) ? options.allFrames : false;
+        this.matchAboutBlank = !IsNil(options.matchAboutBlank) ? options.matchAboutBlank : false;
     }
 
     static get supported() {
@@ -26,7 +26,7 @@ export class RequestContentScript extends Base {
     }
 
     matches(other) {
-        if(!isDefined(other)) {
+        if(IsNil(other)) {
             return false;
         }
 
@@ -35,11 +35,11 @@ export class RequestContentScript extends Base {
         }
 
         return (
-            isEqual(this.allFrames, other.allFrames) &&
-            isEqual(this.matchAboutBlank, other.matchAboutBlank) &&
+            IsEqual(this.allFrames, other.allFrames) &&
+            IsEqual(this.matchAboutBlank, other.matchAboutBlank) &&
 
-            isEqual(this.css.sort(), other.css.sort()) &&
-            isEqual(this.js.sort(), other.js.sort())
+            IsEqual(this.css.sort(), other.css.sort()) &&
+            IsEqual(this.js.sort(), other.js.sort())
         );
     }
 }
@@ -48,11 +48,11 @@ export class SetIcon extends Base {
     constructor(options) {
         super();
 
-        if(!isDefined(options)) {
+        if(IsNil(options)) {
             throw new Error('Invalid value provided for the "options" parameter');
         }
 
-        this.imageData = isDefined(options.imageData) ? options.imageData : null;
+        this.imageData = !IsNil(options.imageData) ? options.imageData : null;
     }
 
     static get supported() {

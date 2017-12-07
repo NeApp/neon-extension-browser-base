@@ -1,6 +1,5 @@
-import isEqual from 'lodash-es/isEqual';
-
-import {isDefined} from 'neon-extension-framework/core/helpers';
+import IsEqual from 'lodash-es/isEqual';
+import IsNil from 'lodash-es/isNil';
 
 import {Base} from '../base';
 
@@ -9,15 +8,15 @@ export class PageStateMatcher extends Base {
     constructor(options) {
         super();
 
-        if(!isDefined(options)) {
+        if(IsNil(options)) {
             throw new Error('Invalid value provided for the "options" parameter');
         }
 
-        this.pageUrl = isDefined(options.pageUrl) ? options.pageUrl : null;
-        this.pattern = isDefined(options.pattern) ? options.pattern : null;
+        this.pageUrl = !IsNil(options.pageUrl) ? options.pageUrl : null;
+        this.pattern = !IsNil(options.pattern) ? options.pattern : null;
 
-        this.css = isDefined(options.css) ? options.css : [];
-        this.isBookmarked = isDefined(options.isBookmarked) ? options.isBookmarked : false;
+        this.css = !IsNil(options.css) ? options.css : [];
+        this.isBookmarked = !IsNil(options.isBookmarked) ? options.isBookmarked : false;
     }
 
     static get supported() {
@@ -25,7 +24,7 @@ export class PageStateMatcher extends Base {
     }
 
     matches(other) {
-        if(!isDefined(other)) {
+        if(IsNil(other)) {
             return false;
         }
 
@@ -34,10 +33,10 @@ export class PageStateMatcher extends Base {
         }
 
         return (
-            isEqual(this.pageUrl, other.pageUrl) &&
-            isEqual(this.isBookmarked, other.isBookmarked) &&
+            IsEqual(this.pageUrl, other.pageUrl) &&
+            IsEqual(this.isBookmarked, other.isBookmarked) &&
 
-            isEqual(this.css.sort(), other.css.sort())
+            IsEqual(this.css.sort(), other.css.sort())
         );
     }
 }
