@@ -6,7 +6,7 @@ import ToNumber from 'lodash-es/toNumber';
 import {Base} from './base';
 
 
-const VersionRegex = /^(\d+)(?:\.(\d+))?/g;
+const VersionRegex = /^(\d+)(?:\.(\d+))?/;
 
 export const Platforms = {
     Unknown: 'Unknown',
@@ -42,7 +42,7 @@ export class Version {
         }
 
         // Match version against pattern
-        let match = VersionRegex.exec(version);
+        let match = version.match(VersionRegex);
 
         if(IsNil(match)) {
             return new Version(null);
