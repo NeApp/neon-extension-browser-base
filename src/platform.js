@@ -3,8 +3,6 @@ import IsNil from 'lodash-es/isNil';
 import Merge from 'lodash-es/merge';
 import ToNumber from 'lodash-es/toNumber';
 
-import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
-
 import {Base} from './base';
 
 

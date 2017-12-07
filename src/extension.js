@@ -1,5 +1,3 @@
-import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
-
 import {EmitterBase} from './base';
 
 
