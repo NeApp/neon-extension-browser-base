@@ -24,7 +24,7 @@ export class StorageContext extends Base {
     }
 
     context(name) {
-        return new StorageContext(this._storage, this.key(name));
+        return new StorageContext(this._storage, this._name + ':' + name);
     }
 
     key(key) {
