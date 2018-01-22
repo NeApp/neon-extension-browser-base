@@ -1,6 +1,8 @@
 import EventEmitter from 'eventemitter3';
 import IsNil from 'lodash-es/isNil';
 
+import Log from 'neon-extension-framework/core/logger';
+
 
 export function isSupported(key) {
     let supported = neon.browser.api[key];
@@ -25,6 +27,7 @@ export class Base {
         try {
             return isSupported(this.key) && !IsNil(this.api);
         } catch(e) {
+            Log.error('Unable to check if "' + this.key + '" is supported', e && e.message || e);
             return false;
         }
     }
@@ -55,6 +58,7 @@ export class EmitterBase extends EventEmitter {
         try {
             return isSupported(this.key) && !IsNil(this.api);
         } catch(e) {
+            Log.error('Unable to check if "' + this.key + '" is supported', e && e.message || e);
             return false;
         }
     }
