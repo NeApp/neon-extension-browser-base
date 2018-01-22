@@ -1,5 +1,4 @@
 import Log from 'neon-extension-framework/core/logger';
-import {NotImplementedError} from 'neon-extension-framework/core/exceptions';
 
 import {Base} from '../base';
 import {StorageContext} from './context';
@@ -8,10 +7,6 @@ import {StorageContext} from './context';
 export class Storage extends Base {
     static get supported() {
         return true;
-    }
-
-    get browser() {
-        throw new NotImplementedError();
     }
 
     context(name) {
