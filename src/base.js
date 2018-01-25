@@ -24,6 +24,10 @@ export class Base {
     }
 
     static get supported() {
+        if(process.env['TEST'] === true) {
+            return false;
+        }
+
         try {
             return isSupported(this.key) && !IsNil(this.api);
         } catch(e) {
@@ -55,6 +59,10 @@ export class EmitterBase extends EventEmitter {
     }
 
     static get supported() {
+        if(process.env['TEST'] === true) {
+            return false;
+        }
+
         try {
             return isSupported(this.key) && !IsNil(this.api);
         } catch(e) {
