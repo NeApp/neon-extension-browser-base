@@ -8,6 +8,14 @@ export class Port extends EmitterBase {
         return true;
     }
 
+    get connected() {
+        throw new NotImplementedError();
+    }
+
+    get error() {
+        throw new NotImplementedError();
+    }
+
     get name() {
         throw new NotImplementedError();
     }
